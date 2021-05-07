@@ -1,0 +1,3 @@
+[submodule "park_simulation/realsense2_description"]
+	path = park_simulation/realsense2_description
+	url = https://github.com/issaiass/realsense2_description.git
