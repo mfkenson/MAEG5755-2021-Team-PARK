@@ -43,3 +43,18 @@ sb
 sw
 baxter_sim
 ```
+
+### PARK Gazebo
+Terminal 1
+```
+sw && roslaunch gazebo_ros empty_world.launch
+```
+Terminal 2
+```
+sw && roslaunch park_gazebo baxter_on_pedestal_w_realsense.launch
+```
+Terminal 3
+```
+baxter_home && rviz -d src/park_simulations/park_gazebo/park.rviz
+```
+![Alt text](/screenshots/baxter_realsense_gazebo_rviz.png?raw=true "Baxter_D435")
