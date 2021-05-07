@@ -1,3 +1,6 @@
 [submodule "park_simulation/realsense2_description"]
 	path = park_simulation/realsense2_description
 	url = https://github.com/issaiass/realsense2_description.git
+[submodule "park_simulation/realsense_gazebo_plugin"]
+	path = park_simulation/realsense_gazebo_plugin
+	url = https://github.com/issaiass/realsense_gazebo_plugin.git
