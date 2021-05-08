@@ -55,6 +55,12 @@ sw && roslaunch park_gazebo baxter_on_pedestal_w_realsense.launch
 ```
 Terminal 3
 ```
-baxter_home && rviz -d src/park_simulations/park_gazebo/park.rviz
+baxter_home && rviz -d src/team-park/park_simulation/park_gazebo/park.rviz
 ```
 ![Alt text](/screenshots/baxter_realsense_gazebo_rviz.png?raw=true "Baxter_D435")
+
+
+### moveit
+```
+roslaunch baxter_moveit_tutorial moveit_init.launch
+```
