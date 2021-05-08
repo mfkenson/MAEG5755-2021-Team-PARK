@@ -4,3 +4,48 @@
 [submodule "park_simulation/realsense_gazebo_plugin"]
 	path = park_simulation/realsense_gazebo_plugin
 	url = https://github.com/pal-robotics/realsense_gazebo_plugin.git
+[submodule "park_moveit/rviz_visual_tools"]
+	path = park_moveit/rviz_visual_tools
+	url = https://github.com/PickNikRobotics/rviz_visual_tools
+[submodule "park_moveit/panda_moveit_config"]
+	path = park_moveit/panda_moveit_config
+	url = https://github.com/mfkenson/panda_moveit_config.git
+	branch = melodic-devel
+[submodule "park_moveit/ros_controllers"]
+	path = park_moveit/ros_controllers
+	url = https://github.com/ros-controls/ros_controllers.git
+	branch = noetic-devel
+[submodule "park_moveit/moveit_visual_tools"]
+	path = park_moveit/moveit_visual_tools
+	url = https://github.com/ros-planning/moveit_visual_tools.git
+[submodule "park_moveit/moveit_tutorials"]
+	path = park_moveit/moveit_tutorials
+	url = https://github.com/ros-planning/moveit_tutorials.git
+[submodule "park_moveit/moveit_robots"]
+	path = park_moveit/moveit_robots
+	url = https://github.com/ros-planning/moveit_robots.git
+	branch = kinetic-devel
+[submodule "park_moveit/moveit_resources"]
+	path = park_moveit/moveit_resources
+	url = https://github.com/ros-planning/moveit_resources.git
+[submodule "park_moveit/moveit_python"]
+	path = park_moveit/moveit_python
+	url = https://github.com/mikeferguson/moveit_python.git
+	branch = ros1
+[submodule "park_moveit/moveit_msgs"]
+	path = park_moveit/moveit_msgs
+	url = https://github.com/ros-planning/moveit_msgs.git
+[submodule "park_moveit/moveit"]
+	path = park_moveit/moveit
+	url = https://github.com/ros-planning/moveit.git
+[submodule "park_moveit/geometric_shapes"]
+	path = park_moveit/geometric_shapes
+	url = https://github.com/ros-planning/geometric_shapes.git
+	branch = noetic-devel
+[submodule "park_moveit/franka_ros"]
+	path = park_moveit/franka_ros
+	url = https://github.com/mfkenson/franka_ros.git
+	branch = kinetic-devel
+[submodule "park_moveit/baxter_moveit_tutorial"]
+	path = park_moveit/baxter_moveit_tutorial
+	url = https://github.com/ravijo/baxter_moveit_tutorial.git
