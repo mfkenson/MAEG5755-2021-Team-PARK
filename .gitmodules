@@ -49,3 +49,7 @@
 [submodule "park_moveit/baxter_moveit_tutorial"]
 	path = park_moveit/baxter_moveit_tutorial
 	url = https://github.com/ravijo/baxter_moveit_tutorial.git
+[submodule "park_moveit/moveit_task_constructor"]
+	path = park_moveit/moveit_task_constructor
+	url = https://github.com/mfkenson/moveit_task_constructor.git
+	branch = pr-deep_grasp_stage

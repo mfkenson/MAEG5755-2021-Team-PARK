@@ -1,0 +1,20 @@
+- git:
+    local-name: deep_grasp_demo
+    uri: https://github.com/mfkenson/deep_grasp_demo.git
+    version: master
+- git:
+    local-name: moveit_task_constructor
+    uri: https://github.com/mfkenson/moveit_task_constructor.git
+    version: pr-deep_grasp_stage
+- git:
+    local-name: panda_moveit_config
+    uri: https://github.com/mfkenson/panda_moveit_config.git
+    version: melodic-devel
+- git:
+    local-name: franka_ros
+    uri: https://github.com/mfkenson/franka_ros.git
+    version: simulation
+- git:
+    local-name: ros_controllers
+    uri: https://github.com/ros-controls/ros_controllers.git
+    version: noetic-devel

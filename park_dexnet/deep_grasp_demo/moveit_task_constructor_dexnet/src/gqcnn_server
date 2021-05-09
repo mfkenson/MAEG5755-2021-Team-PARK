@@ -1,0 +1,150 @@
+#!/usr/bin/env python
+
+"""
+*********************************************************************
+* Software License Agreement (BSD License)
+*
+*  Copyright (c) 2020, PickNik Inc.
+*  All rights reserved.
+*
+*  Redistribution and use in source and binary forms, with or without
+*  modification, are permitted provided that the following conditions
+*  are met:
+*
+*   * Redistributions of source code must retain the above copyright
+*     notice, this list of conditions and the following disclaimer.
+*   * Redistributions in binary form must reproduce the above
+*     copyright notice, this list of conditions and the following
+*     disclaimer in the documentation and/or other materials provided
+*     with the distribution.
+*   * Neither the name of PickNik Inc nor the names of its
+*     contributors may be used to endorse or promote products derived
+*     from this software without specific prior written permission.
+*
+*  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+*  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+*  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
+*  FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
+*  COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+*  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+*  BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+*  LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+*  CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+*  LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
+*  ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+*  POSSIBILITY OF SUCH DAMAGE.
+*********************************************************************
+ Author: Boston Cleek
+ Desc:   The server calls a script running the GQCNN
+
+ PARAMETERS:
+    dexnet_policy_script - executable python3 script of the dexnet policy
+ SERVICES:
+    gqcnn_grasp (GQCNNGrasp) - service requests the grasp candidate from
+                               the learned policy and the probability of success
+"""
+
+# Python
+import subprocess
+import numpy as np
+
+# ROS
+import rospy
+import pickle
+from geometry_msgs.msg import PoseStamped
+from moveit_task_constructor_dexnet.srv import GQCNNGrasp, GQCNNGraspResponse
+
+class GraspServer():
+    """ Advertise a grasp candidate service """
+
+    def __init__(self):
+        """ Constructor """
+
+        # neural network parameters
+        self.model_name = rospy.get_param('~model_name')
+        self.model_dir = rospy.get_param('~model_dir')
+        self.model_params = rospy.get_param('~model_params')
+
+        # camera intrinsics
+        self.camera_calib_intr = rospy.get_param('~camera_calib_intr')
+
+        # dexnet policy executable script
+        self.policy_script = rospy.get_param('~dexnet_policy_script')
+
+        # sampled grasp candidates storage
+        self.sampled_grasps_file = rospy.get_param('~sampled_grasps')
+
+        # sample grasps service
+        self.grasp_serv = rospy.Service('gqcnn_grasp', GQCNNGrasp, self.handle_grasp)
+
+    def handle_grasp(self, req):
+        """  Callback for GQCNNGrasp sevice
+
+        Creates a subprocess (python3 script running the GQCNN) to compose the
+        grasp candidate and q_value
+
+        Args:
+            req (GQCNNGrasp): input is a string for the name of the request
+
+        Return:
+            GQCNNGraspResponse (geometry_msgs/PoseStamped and float64): the 6DOF
+                grasp pose and the score representing the probability of success
+        """
+
+        rospy.loginfo("GQCNN service activated")
+
+        ######################################################################
+        # start subprocess
+        proc = subprocess.Popen(['python3', self.policy_script], stdin=subprocess.PIPE, text=True)
+
+
+        # sends data to stdin, waits until process reaches end of file
+        proc_out = proc.communicate(req.color_img_file_path + '\n' +
+                                    req.depth_img_file_path + '\n' +
+                                    self.sampled_grasps_file + '\n' +
+                                    self.camera_calib_intr + '\n' +
+                                    self.model_name + '\n' +
+                                    self.model_dir + '\n' +
+                                    self.model_params + '\n')[0]
+        # end subproces
+        ######################################################################
+
+        # sampled grasps
+        sols_file = open(self.sampled_grasps_file, 'rb')
+        data = pickle.load(sols_file)
+        sols_file.close()
+
+        # service response
+        grasp_response = GQCNNGraspResponse()
+
+        for i in range(len(data)):
+            grasp_pose = PoseStamped()
+            grasp_pose.header.frame_id = data[i][0]
+            # position [x y z]
+            grasp_pose.pose.position.x = data[i][1][0]
+            grasp_pose.pose.position.y = data[i][1][1]
+            grasp_pose.pose.position.z = data[i][1][2]
+
+            # orientation [qw qx qy qz]
+            grasp_pose.pose.orientation.w = data[i][2][0]
+            grasp_pose.pose.orientation.x = data[i][2][1]
+            grasp_pose.pose.orientation.y = data[i][2][2]
+            grasp_pose.pose.orientation.z = data[i][2][3]
+
+            grasp_response.grasps.append(grasp_pose)
+            grasp_response.q_values.append(data[i][3])
+
+        return grasp_response
+
+
+def main():
+    rospy.init_node('gqcnn_server')
+    grasp_server = GraspServer()
+    rospy.spin()
+
+
+if __name__ == "__main__":
+    try:
+        main()
+    except rospy.ROSInterruptException:
+        pass

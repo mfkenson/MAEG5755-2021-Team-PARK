@@ -1,0 +1,4 @@
+# file path to neural network weights and model config
+model_name: "GQCNN-4.0-PJ"
+model_dir: "/home/developr/Documents/dexnet_baxter/models/GQCNN-4.0-PJ"
+model_params: "/home/developr/Documents/dexnet_baxter/dexnet_deps/gqcnn/cfg/examples/replication/dex-net_4.0_pj.yaml"
