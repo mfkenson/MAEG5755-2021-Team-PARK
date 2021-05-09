@@ -6,11 +6,12 @@ Pretty, Alice, Rui, Kenson
 ```
 mkdir -p $HOME/5755_ws/src
 cd $HOME/5755_ws/src
-git clone --resursive https://github.com/rojas70/learning_ros_external_pkgs_noetic.git
-git clone --resursive https://github.com/rojas70/learning_ros_noetic.git
-git clone --resursive https://github.com/mfkenson/MAEG5755-2021-Team-PARK.git team-park
+git clone --recursive https://github.com/rojas70/learning_ros_external_pkgs_noetic.git
+git clone --recursive https://github.com/rojas70/learning_ros_noetic.git
+git clone --recursive https://github.com/mfkenson/MAEG5755-2021-Team-PARK.git team-park
 
 cd $HOME/5755_ws/
+cp src/learning_ros_external_pkgs_noetic/baxter/baxter.sh .
 bash $HOME/5755_ws/src/team-park/dependencies/install_dependencies.sh
 cat $HOME/5755_ws/src/team-park/dependencies/shortcuts_alias.txt >> ~/.bashrc
 ```
