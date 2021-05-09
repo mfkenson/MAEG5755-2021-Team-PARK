@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <launch>
-  <arg name="load_images" default="true" doc="load images from file"/>
+  <arg name="load_images" default="false" doc="load images from file"/>
 
   <arg name="action_name" value="generate_grasps" doc="action name space"/>
   <arg name="frame_id" value="panda_link0" doc="frame of the grasps sent to MTC"/>

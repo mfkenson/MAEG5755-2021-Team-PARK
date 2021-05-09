@@ -95,7 +95,7 @@ class GraspServer():
 
         ######################################################################
         # start subprocess
-        proc = subprocess.Popen(['python3', self.policy_script], stdin=subprocess.PIPE, text=True)
+        proc = subprocess.Popen(['python3.6', self.policy_script], stdin=subprocess.PIPE, text=True)
 
 
         # sends data to stdin, waits until process reaches end of file
