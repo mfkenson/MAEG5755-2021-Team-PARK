@@ -1,0 +1,54 @@
+<launch>
+  <arg name="camera1"              		default="d435"/>
+  <arg name="tf_prefix_camera1"         default="$(arg camera1)"/>
+  <arg name="tf_prefix_camera2"         default="$(arg camera2)"/>
+  <arg name="initial_reset"             default="true"/>
+  <arg name="enable_sync"               default="true"/>
+
+  <!-- d435 -->
+  <arg name="color_width"               default="640"/>
+  <arg name="color_height"              default="480"/>
+  <arg name="color_fps"                 default="15"/>
+  <arg name="depth_width"               default="640"/>
+  <arg name="depth_height"              default="480"/>
+  <arg name="depth_fps"                 default="15"/>
+  <arg name="infra_width"               default="640"/>
+  <arg name="infra_height"              default="480"/>
+  <arg name="infra_fps"                 default="15"/>
+  <arg name="enable_depth"              value="true"/>
+  <arg name="enable_color"              value="true"/>
+  <arg name="enable_infra1"             value="false"/>
+  <arg name="enable_infra2"             value="false"/>
+  <arg name="enable_pointcloud"         value="true"/>
+  <arg name="filters"                   value="pointcloud"/>
+  <!-- end d435 -->
+
+  <group ns="$(arg camera1)">
+    <include file="$(find realsense2_camera)/launch/includes/nodelet.launch.xml">
+      <arg name="tf_prefix"		value="$(arg tf_prefix_camera1)"/>
+      <arg name="initial_reset"         value="$(arg initial_reset)"/>
+      <arg name="color_width"       value="$(arg color_width)"/>
+      <arg name="color_height"      value="$(arg color_height)"/>
+      <arg name="color_fps"         value="$(arg color_fps)"/>
+      <arg name="depth_width"       value="$(arg depth_width)"/>
+      <arg name="depth_height"      value="$(arg depth_height)"/>
+      <arg name="depth_fps"         value="$(arg depth_fps)"/>
+      <arg name="infra_width"       value="$(arg infra_width)"/>
+      <arg name="infra_height"      value="$(arg infra_height)"/>
+      <arg name="infra_fps"         value="$(arg infra_fps)"/>
+      <arg name="enable_depth"      value="$(arg enable_depth)"/>
+      <arg name="enable_color"      value="$(arg enable_color)"/>
+      <arg name="enable_infra1"     value="$(arg enable_infra1)"/>
+      <arg name="enable_infra2"     value="$(arg enable_infra2)"/>
+      <arg name="enable_pointcloud" value="$(arg enable_pointcloud)"/>
+      <arg name="filters"           value="$(arg filters)"/>
+      <arg name="enable_sync"       value="$(arg enable_sync)"/>
+    </include>
+  </group>
+
+
+  <node pkg="tf" type="static_transform_publisher" name="d435_link_to_depth" args="0.0 0.0 0.0 -0.5 0.5 -0.5 0.5 $(arg tf_prefix_camera1)_link $(arg tf_prefix_camera1)_depth_optical_frame 30"/>
+  <!-- TODO relative to base_link
+  <node pkg="tf" type="static_transform_publisher" name="t265_to_d435" args="0.0 0.0 0.0 0.0 0.0 0.0 1.0 base_link $(arg tf_prefix_camera1)_link 30"/>
+  -->
+</launch>
