@@ -31,7 +31,7 @@
       <origin xyz="1 0 1.5" rpy="0 1.55 0" />
     </sensor_d435>
   -->
-  <xacro:include filename="$(find realsense2_description)/urdf/_d435.urdf.xacro" />
+  <xacro:include filename="$(find realsense2_description_gazebo)/urdf/_d435.urdf.xacro" />
   <xacro:sensor_d435 name="d435" topics_ns="d435" parent="base_link" publish_pointcloud="true">
         <origin xyz="1 0 1.5" rpy="0 1.55 0" />
   </xacro:sensor_d435>
