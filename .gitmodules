@@ -53,3 +53,6 @@
 	path = park_moveit/moveit_task_constructor
 	url = https://github.com/mfkenson/moveit_task_constructor.git
 	branch = pr-deep_grasp_stage
+[submodule "park_camera/realsense-ros"]
+	path = park_camera/realsense-ros
+	url = https://github.com/IntelRealSense/realsense-ros.git
