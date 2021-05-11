@@ -81,3 +81,9 @@ roslaunch baxter_moveit_tutorial moveit_init.launch
 ```
 rosrun park_demo export_image.py :topic='/cameras/head_camera/image'
 ```
+
+### Depth Image Visualization
+![RGB](/screenshots/visualize_color.png?raw=true "RGB")
+![339mm](/screenshots/visualize_depth.png?raw=true "Depth object 339mm")
+![446mm](/screenshots/visualize_depth_table.png?raw=true "Depth table 446mm")
+
