@@ -1,11 +1,11 @@
 <launch>
   <arg name="camera1"              		default="d435"/>
   <arg name="tf_prefix_camera1"         default="$(arg camera1)"/>
-  <arg name="tf_prefix_camera2"         default="$(arg camera2)"/>
   <arg name="initial_reset"             default="true"/>
   <arg name="enable_sync"               default="true"/>
 
   <!-- d435 -->
+  <arg name="align_depth"               default="true"/>
   <arg name="color_width"               default="640"/>
   <arg name="color_height"              default="480"/>
   <arg name="color_fps"                 default="15"/>
@@ -43,6 +43,7 @@
       <arg name="enable_pointcloud" value="$(arg enable_pointcloud)"/>
       <arg name="filters"           value="$(arg filters)"/>
       <arg name="enable_sync"       value="$(arg enable_sync)"/>
+      <arg name="align_depth"       value="$(arg align_depth)"/>
     </include>
   </group>
 

@@ -2,6 +2,17 @@
 Team PARK Repo for MAEG5755 Robotics Project
 Pretty, Alice, Rui, Kenson
 
+
+### Objectives
+1. Dexnet 4.0 bin picking demo with Baxter
+2. Refresh Baxter! (ROS Noetic, baxter_interface, realsense2, Moveit, Moveit Task Constructor)
+3. Showcase how to run a baxter in 2021
+
+### Wiki
+[Wiki](https://github.com/mfkenson/MAEG5755-2021-Team-PARK/wiki) is more comprehensive and up-to-date.
+
+Especically the [FAQ](https://github.com/mfkenson/MAEG5755-2021-Team-PARK/wiki#faq)
+
 ### First time setup 
 ```
 mkdir -p $HOME/5755_ws/src
@@ -64,4 +75,9 @@ baxter_home && rviz -d src/team-park/park_simulation/park_gazebo/park.rviz
 ### moveit
 ```
 roslaunch baxter_moveit_tutorial moveit_init.launch
+```
+
+### export image
+```
+rosrun park_demo export_image.py :topic='/cameras/head_camera/image'
 ```
