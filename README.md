@@ -79,7 +79,7 @@ roslaunch baxter_moveit_tutorial moveit_init.launch
 
 ### export image
 ```
-rosrun park_demo export_image.py :topic='/cameras/head_camera/image'
+rosrun park_demo export_image.py _image_topic:='/cameras/head_camera/image'
 ```
 
 ### Depth Image Visualization
