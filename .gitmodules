@@ -59,3 +59,7 @@
 [submodule "park_simulation/realsense2_description_gazebo"]
 	path = park_simulation/realsense2_description_gazebo
 	url = https://github.com/mfkenson/realsense2_description_gazebo.git
+[submodule "park_camera/ar_track_alvar"]
+	path = park_camera/ar_track_alvar
+	url = https://github.com/machinekoder/ar_track_alvar.git
+	branch = noetic-devel
