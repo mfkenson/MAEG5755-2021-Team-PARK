@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 import rospy
-from cv_bridge import CvBridge, CvBridgeError
+from cv_bridge import CvBridge
 from sensor_msgs.msg import Image
 import numpy as np
 
@@ -17,6 +17,8 @@ def main():
     rospy.init_node('export_image', anonymous=True)
     topic_name = '/kinect/rgb/image_raw'
     topic_name = '/kinect/depth/image_raw'
+    topic_name = '/d435/depth/image_raw'
+
     topic_name = rospy.get_param('~image_topic', topic_name)
     rospy.loginfo('wait for topic:')
     rospy.loginfo(topic_name)

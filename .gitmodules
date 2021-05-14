@@ -63,3 +63,6 @@
 	path = park_camera/ar_track_alvar
 	url = https://github.com/machinekoder/ar_track_alvar.git
 	branch = noetic-devel
+[submodule "park_moveit/moveit_calibration"]
+	path = park_moveit/moveit_calibration
+	url = https://github.com/ros-planning/moveit_calibration.git
