@@ -20,7 +20,7 @@ from math import pi
 def perform_inference(depth_arr):
     model_dir = '/home/developr/Documents/dexnet_baxter/models/GQCNN-4.0-PJ'
     model_params = '/home/developr/Documents/dexnet_baxter/dexnet_deps/gqcnn/cfg/examples/replication/dex-net_4.0_pj.yaml'
-    camera_intr_filename = '/home/developr/5755_ws/src/team-park/park_dexnet/deep_grasp_demo/deep_grasp_task/config/calib/camera.intr'
+    camera_intr_filename = '/home/developr/5755_ws/src/team-park/park_dexnet/config/camera_d435_gazebo.intr'
     camera_intr = CameraIntrinsics.load(camera_intr_filename)
     config = YamlConfig(model_params)
     policy_config = config["policy"]
@@ -64,6 +64,6 @@ def main():
         print("Best candidate")
         print("position", poses_candidates[0][0])
         print("quaternion", poses_candidates[0][1])
-        print("q value", poses_candidates[0][1])
+        print("q value", poses_candidates[0][2])
 if __name__ == '__main__':
     main()
