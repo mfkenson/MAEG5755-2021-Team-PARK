@@ -2,14 +2,14 @@
 
 import PySimpleGUI as sg
 
-sg.theme('DarkAmber')   # Add a touch of color
+sg.theme('GrayGrayGray')   # Add a touch of color
 # All the stuff inside your window.
-layout = [  [sg.Text('Some text on Row 1')],
-            [sg.Text('Enter something on Row 2'), sg.InputText()],
+layout = [  [sg.Text('Lets see what we will have')],
+            [sg.Text('...'), sg.InputText()],
             [sg.Button('Ok'), sg.Button('Cancel')] ]
 
 # Create the Window
-window = sg.Window('Window Title', layout)
+window = sg.Window('PARK Demo', layout)
 # Event Loop to process "events" and get the "values" of the inputs
 while True:
     event, values = window.read()

@@ -26,6 +26,7 @@ cp src/learning_ros_external_pkgs_noetic/baxter/baxter.sh .
 cd $HOME/5755_ws/src/team-park/dependencies/ && bash install_dependencies.sh
 cat $HOME/5755_ws/src/team-park/dependencies/shortcuts_alias.txt >> ~/.bashrc
 ```
+Real environment you need to also [install librealsense](https://github.com/IntelRealSense/librealsense/blob/master/doc/distribution_linux.md).
 
 ### Pulling latest from upstream repo
 ```
@@ -60,7 +61,7 @@ cd $HOME/5755_ws && catkin_make -DCATKIN_WHITELIST_PACKAGES="" -j1
 ### Gazebo Simulation
 
 * Not recommend to use baxter.sh anymore. We should manually handle the environment variables.
-* In simulation mode, make sure your ~/.bashrc export ROS_IP and export ROS_MASTER_URI (pointing to localhost, i.e. 127.0.0.1)
+* In simulation mode, make sure your ~/.bashrc DO export ROS_IP and export ROS_MASTER_URI (pointing to localhost, i.e. 127.0.0.1)
 ```
 export ROS_IP=127.0.0.1
 export ROS_MASTER_URI=http://127.0.0.1:11311
@@ -94,7 +95,7 @@ rosrun baxter_tools tuck_arms.py -u
 ### Real environment in CUHK Robotics Lab
 
 * Not recommend to use baxter.sh anymore. We should manually handle the environment variables.
-* In real environment mode, make sure your ~/.bashrc DOES export ROS_IP and export ROS_MASTER_URI
+* In real environment mode, make sure your ~/.bashrc DO export ROS_IP and export ROS_MASTER_URI
 * In this case IP address is 192.168.11.101 and the baxter hostname is 011508P0007.local. Check out the [wiki](https://github.com/mfkenson/MAEG5755-2021-Team-PARK/wiki/Baxter-Simulation-and-Real-Robot) for hostname resolving
 ```
 export ROS_IP=192.168.11.101
@@ -118,7 +119,7 @@ Terminal 4: Enable the robot
 ```
 rosrun baxter_tools enable_robot.py -e
 ```
-Terminal 5: Publishing transform for realsense camera and world frame(Optional)
+Terminal 5: Publishing transform for realsense camera and world frame (after hand eye calibration only)
 ```
 TODO TODO TODO 
 ```
@@ -126,3 +127,10 @@ here simply launch a generated launch file obtained from hand-eye calibration pr
 
 ### Caution
 In rviz you can plan your path under motion planning tab even with scene planner. Be aware of surroundings when executing trajectory.
+
+### Tips for pycharm users
+* Get pycharm IDE [here](https://www.jetbrains.com/pycharm/download/#section=linux)
+* community version is more than sufficient
+* There is a collection of python launcher scripts managing the roslaunch process.
+* See [park_demo/park_demo/scripts/launcher](https://github.com/mfkenson/MAEG5755-2021-Team-PARK/tree/main/park_demo/park_demo/scripts/launcher)
+* Make sure you source the workspace before opening pycharm in terminal and having the roscore running somewhere else
