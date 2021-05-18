@@ -26,8 +26,7 @@ def main():
     print('--------------------------------------------------------------------------')
     print('left_current_joints_pos: ',np.array(left_current_joints_pos)*180/math.pi)
     print('right_current_joints_pos: ',np.array(right_current_joints_pos)*180/math.pi)
-    leftgripper.calibrate()
-    leftgripper.open()
+
     rospy.sleep(5)
     '''
     # no guarded; use with caution
