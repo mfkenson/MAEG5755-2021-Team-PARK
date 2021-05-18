@@ -41,8 +41,8 @@ def reset_robot_msg():
 
 def reset_coke_msg():
     position = dict()
-    position['x'] = 0.8
-    position['y'] = -0.2
+    position['x'] = 0.77
+    position['y'] = 0.15
     position['z'] = 0.77
     return fill_in_model_state_msg('coke_can', position, None)
 
@@ -63,14 +63,10 @@ def main():
     set_state = rospy.ServiceProxy('/gazebo/set_model_state', SetModelState)
 
     #-----------------------------------------------------------------------------
-    resp = set_state(reset_table_msg())
-    rospy.sleep(3)
     # -----------------------------------------------------------------------------
     resp = set_state(reset_coke_msg())
     rospy.sleep(3)
 # -----------------------------------------------------------------------------
-    resp = set_state(reset_robot_msg())
-    rospy.sleep(3)
 
 
 

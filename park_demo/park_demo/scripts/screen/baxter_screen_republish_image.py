@@ -12,7 +12,7 @@ def image_callback(msg, pub):
 def main():
     rospy.init_node('image_republisher')
     # Define your image topic
-    stream_image_topic = "/cameras/left_hand_camera/image"
+    stream_image_topic = "/d435/color/image_raw"
     # Define the Display topic
     xdisplay_topic = "/robot/xdisplay"
     # Set up your subscriber and define its callback

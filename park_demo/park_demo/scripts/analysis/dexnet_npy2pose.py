@@ -43,27 +43,44 @@ def perform_inference(depth_arr):
             #grasp_candidates[i].pose().to_frame,
             np.round(grasp_candidates[i].pose().position, 6),
             np.round(grasp_candidates[i].pose().quaternion,6),
-            q_values[i]])
+            q_values[i],
+            grasp_candidates[i].center.vector,  # center is a type of autolab_core.Point
+            grasp_candidates[i].angle,
+            grasp_candidates[i].depth,
+            grasp_candidates[i].width,
+            grasp_candidates[i].contact_points,
+            grasp_candidates[i].contact_normals,
+            grasp_candidates[i].axis,
+            grasp_candidates[i].approach_angle,
+            grasp_candidates[i].width_px,
+            grasp_candidates[i].endpoints,
+            grasp_candidates[i].feature_vec,
+            grasp_candidates[i].width_px,
+        ])
             )
     if len(candidate_array)==0:
         return None
+    best_idx = policy.select(grasp_candidates, q_values )
     result = np.array(candidate_array)
-    df = pd.DataFrame(result, columns =['position', 'quaternion', 'q_value'])
-    sorted_arr = df.sort_values('q_value', ascending=False).to_numpy()
-    return sorted_arr
+    print('Best idx: ', best_idx)
+    return result, best_idx
+    #df = pd.DataFrame(result, columns =['position', 'quaternion', 'q_value'])
+    #sorted_arr = df.sort_values('q_value', ascending=False).to_numpy()
+    #return sorted_arr
 
     
 def main():
     npy_file_path = '_d435_depth_image_raw.npy'
     arr = np.load(npy_file_path)
     arr = arr/1000.0
-    poses_candidates = perform_inference(arr)
+    poses_candidates, best_idx = perform_inference(arr)
     if poses_candidates is None:
         print("No candidates found")
     else:
         print("Best candidate")
-        print("position", poses_candidates[0][0])
-        print("quaternion", poses_candidates[0][1])
-        print("q value", poses_candidates[0][2])
+        print("position", poses_candidates[best_idx][0])
+        print("quaternion", poses_candidates[best_idx][1])
+        print("q value", poses_candidates[best_idx][2])
+    np.save('_d435_dexnet_pose_'+ str(best_idx)+'.npy', poses_candidates)
 if __name__ == '__main__':
     main()

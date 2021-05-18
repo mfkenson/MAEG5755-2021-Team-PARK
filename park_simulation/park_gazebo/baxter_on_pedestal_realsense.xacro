@@ -29,8 +29,10 @@
 
   <xacro:include filename="$(find realsense2_description_gazebo)/urdf/_d435.urdf.xacro" />
   <xacro:sensor_d435 name="d435" topics_ns="d435" parent="base_link" publish_pointcloud="true">
-        <!-- <origin xyz="0.7 0 1.5" rpy="0 1.57075 0" /> -->
-        <!-- <origin xyz="0.8 0 1.4" rpy="0 1.57075 3.14159" />-->
-        <origin xyz="0.15 0 1.05" rpy="0 0 0" />
+        <!-- <origin xyz="0.7 0 1.3" rpy="0 1.35 0" /> 0.28Q -->
+        <!-- <origin xyz="0.5 0 1.3" rpy="0 1.75 3.14159" /> 0.1Q -->
+        <!-- <origin xyz="0.7 0 1.6" rpy="0 1.4 0" /> --><!-- 0.82Q -->
+        <origin xyz="1 0 1.5" rpy="0 1.55 0" />
+        <!-- <origin xyz="0.2 0 1.05" rpy="0 0 0" /> -->
   </xacro:sensor_d435>
 </robot>

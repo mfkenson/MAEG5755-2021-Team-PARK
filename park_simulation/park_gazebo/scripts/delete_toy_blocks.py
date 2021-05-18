@@ -9,9 +9,16 @@ def main():
     rospy.wait_for_service('/gazebo/delete_model')
     try:
         del_model_prox = rospy.ServiceProxy('gazebo/delete_model', DeleteModel)
-        resp = del_model_prox( "cafe_table" )
+        resp = del_model_prox( "toy_block_1" )
         print(resp)
+
         rospy.sleep(2)
+
+
+        del_model_prox = rospy.ServiceProxy('gazebo/delete_model', DeleteModel)
+        resp = del_model_prox( "toy_block_2" )
+        print(resp)
+
     except rospy.ServiceException as e:
         print ("Service call failed: %s" % e)
 
