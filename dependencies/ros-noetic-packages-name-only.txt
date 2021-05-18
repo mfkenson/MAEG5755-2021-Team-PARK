@@ -208,6 +208,7 @@ ros-noetic-qt-gui-py-common
 ros-noetic-qt-gui
 ros-noetic-qwt-dependency
 ros-noetic-random-numbers
+ros-noetic-realsense2-camera
 ros-noetic-realtime-tools
 ros-noetic-resource-retriever
 ros-noetic-robot-state-publisher
