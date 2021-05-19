@@ -24,11 +24,12 @@ def fill_goal_message(frame_id, position, orientation):
     return goal
 
 
-def move_z_relative(group, z_offset):
+def move_xyz_relative(group, z=0, y=0):
     #moveit commander group
     waypoints = []
     wpose = group.get_current_pose().pose
-    wpose.position.z += z_offset
+    wpose.position.z += z
+    wpose.position.y += y
     waypoints.append(copy.deepcopy(wpose))
     # We want the Cartesian path to be interpolated at a resolution of 1 cm
     # which is why we will specify 0.01 as the eef_step in Cartesian
@@ -38,6 +39,10 @@ def move_z_relative(group, z_offset):
         0.01,  # eef_step
         0.0)  # jump_threshold
     # Note: We are just planning, not asking move_group to actually move the robot yet:
+
+    plan = group.retime_trajectory(group.get_current_state(),
+        plan, velocity_scaling_factor=0.2, acceleration_scaling_factor=0.2,
+        algorithm="time_optimal_trajectory_generation")
     return plan, fraction
 
 
@@ -54,12 +59,29 @@ def main():
 
     leftgripper = baxter_interface.Gripper('left')
     rightgripper = baxter_interface.Gripper('right')
-    #gl.moveToPose(ready_pose(), "left_gripper", plan_only=False)
-    leftgripper.open()
+    rospy.sleep(1)
+    leftgripper.open(block=True, timeout=1.0)
 
-    plan, _ = move_z_relative(group, -0.15)
+    rospy.sleep(1)
+    plan, _ = move_xyz_relative(group, z=-0.15)
     group.execute(plan, wait=True)
-    leftgripper.close()
+    rospy.sleep(1)
+    leftgripper.close(block=True, timeout=1.0)
+    rospy.sleep(1)
+    plan, _ = move_xyz_relative(group, z=0.15)
+    group.execute(plan, wait=True)
+    rospy.sleep(1)
+    plan, _ = move_xyz_relative(group, z=0, y=0.3)
+    group.execute(plan, wait=True)
+    rospy.sleep(1)
+    plan, _ = move_xyz_relative(group, z=-0.15)
+    group.execute(plan, wait=True)
+    leftgripper.open(block=True, timeout=1.0)
+    rospy.sleep(1)
+    plan, _ = move_xyz_relative(group, z=0.15)
+    group.execute(plan, wait=True)
+    plan, _ = move_xyz_relative(group, y=-0.3)
+    group.execute(plan, wait=True)
     print('OK')
 
 if __name__ == '__main__':

@@ -162,13 +162,11 @@ def main():
     topic_name = rospy.get_param('~image_topic', topic_name)
     rospy.loginfo('wait for topic:')
     rospy.loginfo(topic_name)
-    msg = rospy.wait_for_message(topic_name, Image)
+    rospy.wait_for_message(topic_name, Image)
     rospy.loginfo('Received an image')
     listener = tf.TransformListener()
     listener.waitForTransform(world_frame, camera_frame, rospy.Time.now(), rospy.Duration(10.0))
     rospy.loginfo('Received a Transform')
-
-
 
     joint_state_topic = ['joint_states:=/robot/joint_states']
     moveit_commander.roscpp_initialize(joint_state_topic)
@@ -193,14 +191,6 @@ def main():
     else:
 
         attempt_counter = best_idx
-        '''        
-        leftgripper = baxter_interface.Gripper('left')
-        rightgripper = baxter_interface.Gripper('right')
-        leftgripper.calibrate()
-        rightgripper.calibrate()
-        leftgripper.open()
-        rightgripper.open()
-        '''
         while True:
 
             current_candidate = poses_candidates[attempt_counter]
@@ -219,10 +209,17 @@ def main():
             #result = gr.moveToPose(pre_g_pose(pose_world_frame), "right_gripper", planning_time=0.1)
             if result.error_code.val == 1:
                 pre_g = pose_world_frame
+                print('arrived')
                 break
+            elif result.error_code.val == -4:
+                #execution failed
+                print('execution failed')
+                break
+
             else:
                 print(result.error_code.val)
                 attempt_counter = attempt_counter + 1
+                print('next')
                 continue
 
 

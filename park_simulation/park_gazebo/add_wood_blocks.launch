@@ -1,0 +1,5 @@
+<launch>
+<node name="spawn_wooden_cube_1" pkg="gazebo_ros" type="spawn_model" args="-file $(find park_gazebo)/models/wood_block_4cm/model.sdf -sdf -model wood_block_1 -x 0.68 -y 0.2 -z 0.8 -Y 1.55" />
+<node name="spawn_wooden_cube_2" pkg="gazebo_ros" type="spawn_model" args="-file $(find park_gazebo)/models/wood_block_4cm/model.sdf -sdf -model wood_block_2 -x 0.78 -y 0.2 -z 0.8" />
+<node name="spawn_wooden_cube_3" pkg="gazebo_ros" type="spawn_model" args="-file $(find park_gazebo)/models/wood_block_4cm/model.sdf -sdf -model wood_block_3 -x 0.73 -y 0.3 -z 0.8 -Y 1.55" />
+</launch>
