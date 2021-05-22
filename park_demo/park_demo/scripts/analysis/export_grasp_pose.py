@@ -44,10 +44,15 @@ def perform_inference(depth_arr):
     color_im = ColorImage(np.zeros([depth_im.height, depth_im.width,
                                         3]).astype(np.uint8),
                             frame=camera_intr.frame)
+    imported_mask = np.load('analysis/depth_roi_mask_uint8.npy', allow_pickle=True)
+    segmask = BinaryImage(imported_mask,
+                          frame=color_im.frame)
+    '''
     #no segmask; all ones
     segmask = BinaryImage(255 *
                           np.ones(depth_im.shape).astype(np.uint8),
                           frame=color_im.frame)
+    '''
     rgbd_im = RgbdImage.from_color_and_depth(color_im, depth_im)
     state = RgbdImageState(rgbd_im, camera_intr, segmask=segmask)
     policy = CrossEntropyRobustGraspingPolicy(policy_config)
