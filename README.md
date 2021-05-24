@@ -119,12 +119,23 @@ Terminal 4: Enable the robot
 ```
 rosrun baxter_tools enable_robot.py -e
 ```
-Terminal 5: Publishing transform for realsense camera and world frame (after hand eye calibration only)
+Terminal 5: Publishing transform for realsense camera and world frame (No need for simulation, and after hand eye calibration only)
 ```
-TODO TODO TODO 
+baxter_home && sw roslaunch park_demo tf_handeye.launch
 ```
 here simply launch a generated launch file obtained from hand-eye calibration process. See [wiki](https://github.com/mfkenson/MAEG5755-2021-Team-PARK/wiki/Hand-Eye-Calibration)
 
+Terminal 6: Add a table and spawn some blocks
+```
+baxter_home && sw 
+roslaunch park_gazebo add_table.launch
+roslaunch park_gazebo add_wood_blocks.launch
+```
+Terminal 7: Execute dexnet_pick_and_place.py
+```
+baxter_home && sw
+python3.6 src/team_park/park_demo/park_demo/scripts/dexnet_pick_and_place.py
+```
 ### Caution
 In rviz you can plan your path under motion planning tab even with scene planner. Be aware of surroundings when executing trajectory.
 
