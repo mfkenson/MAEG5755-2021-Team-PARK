@@ -26,8 +26,8 @@ def export_pointcloud(ros_point_cloud, file_name):
 
 
 def process_and_plot(pc):
-
-    points = np.zeros((3, pc.shape[0] * pc.shape[1]))
+    pc_shape = pc.shape
+    points = np.zeros((3, pc.shape[0]))
     points[0] = pc['x'].flatten()
     points[1] = pc['y'].flatten()
     points[2] = pc['z'].flatten()

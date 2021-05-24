@@ -8,8 +8,8 @@ import baxter_interface
 from math import pi
 import tf
 import copy
-
-
+import math
+import numpy as np
 def fill_goal_message(frame_id, position, orientation):
     goal = PoseStamped()
     goal.header.frame_id = frame_id
@@ -71,18 +71,28 @@ def main():
     plan, _ = move_xyz_relative(group, z=0.15)
     group.execute(plan, wait=True)
     rospy.sleep(1)
-    plan, _ = move_xyz_relative(group, z=0, y=0.3)
+
+
+
+    wpose = group.get_current_pose().pose
+    target_y = 0.6 - wpose.position.y
+    plan, _ = move_xyz_relative(group, z=0, y=target_y)
     group.execute(plan, wait=True)
     rospy.sleep(1)
     plan, _ = move_xyz_relative(group, z=-0.15)
     group.execute(plan, wait=True)
     leftgripper.open(block=True, timeout=1.0)
     rospy.sleep(1)
-    plan, _ = move_xyz_relative(group, z=0.15)
+    plan, _ = move_xyz_relative(group, z=0.3)
     group.execute(plan, wait=True)
-    plan, _ = move_xyz_relative(group, y=-0.3)
-    group.execute(plan, wait=True)
+    '''
+    #plan, _ = move_xyz_relative(group, y=-0.3)
+    #group.execute(plan, wait=True)
     print('OK')
+
+    
+     
+    '''
 
 if __name__ == '__main__':
     main()

@@ -17,7 +17,7 @@ def main():
     rospy.init_node('export_image', anonymous=True)
 
     topic_name = '/d435/depth/image_rect_raw'#real env
-    topic_name = '/d435/depth/image_raw'
+    #topic_name = '/d435/depth/image_raw'
 
     topic_name = rospy.get_param('~image_topic', topic_name)
     rospy.loginfo('wait for topic:')

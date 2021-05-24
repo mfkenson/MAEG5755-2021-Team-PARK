@@ -31,7 +31,10 @@ def main():
                          PlanningSceneComponents.ROBOT_STATE_ATTACHED_OBJECTS
         scene = service(req)
         #ready_joints_left = np.array([-45.0, -45.0, 0, 45, 0.0, 90.0, 0.0]) * math.pi / 180.0 #zombie
-        ready_joints_left = np.array([-20.0, -70.0, -20.0, 60.0, 0.0, 90.0, -55.0]) * math.pi / 180.0
+        ready_joints_left = np.array([
+            -22.03857422, -24.38964844, -85.73730469,   58.07373047, -115.62011719,-89.97802734, -44.09912109
+        ]
+        ) * math.pi / 180.0
         result = gl.moveToJointPosition(jts_left, ready_joints_left, plan_only=False, wait=True, max_velocity_scaling_factor=0.3)
         print(result)
 

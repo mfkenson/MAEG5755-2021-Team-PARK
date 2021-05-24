@@ -1,0 +1,7 @@
+<launch>
+<node name="spawn_stuff_1" pkg="gazebo_ros" type="spawn_model" args="-file $(find park_gazebo)/models/biscuits/model.sdf -sdf -model stuff_1 -x 0.68 -y 0.2 -z 0.8 -Y 1.55" />
+<node name="spawn_stuff_2" pkg="gazebo_ros" type="spawn_model" args="-file $(find park_gazebo)/models/book/model.sdf -sdf -model stuff_2 -x 0.78 -y 0.2 -z 0.8" />
+<node name="spawn_stuff_3" pkg="gazebo_ros" type="spawn_model" args="-file $(find park_gazebo)/models/glue/model.sdf -sdf -model stuff_3 -x 0.73 -y 0.3 -z 0.8 -Y 1.55" />
+<node name="spawn_stuff_4" pkg="gazebo_ros" type="spawn_model" args="-file $(find park_gazebo)/models/snacks/model.sdf -sdf -model stuff_4 -x 0.73 -y 0.3 -z 1.0 -Y 1.55" />
+<node name="spawn_stuff_5" pkg="gazebo_ros" type="spawn_model" args="-file $(find park_gazebo)/models/soap/model.sdf -sdf -model stuff_5 -x 0.78 -y 0.2 -z 1.0 -Y 1.55" />
+</launch>

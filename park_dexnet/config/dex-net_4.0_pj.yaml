@@ -1,15 +1,15 @@
 policy:
   # optimization params
-  num_seed_samples: 128
+  num_seed_samples: 64
   num_gmm_samples: 64
-  num_iters: 5
+  num_iters: 3
   gmm_refit_p: 0.25
   gmm_component_frac: 0.4
   gmm_reg_covar: 0.01
 
   # general params
   deterministic: 1
-  gripper_width: 0.05
+  gripper_width: 0.06
 
   # sampling params
   sampling:

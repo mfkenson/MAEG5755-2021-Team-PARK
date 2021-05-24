@@ -30,7 +30,7 @@ def main():
         scene = service(req)
         ready_joints_left = np.array([0.0,-90.0, 0.0, 45.0,-45.0, 90.0,0.0]) * math.pi / 180.0
 
-        result = gl.moveToJointPosition(jts_left, ready_joints_left, plan_only=False, wait=True, max_velocity_scaling_factor=0.3)
+        result = gl.moveToJointPosition(jts_left, ready_joints_left, plan_only=False, wait=True, max_velocity_scaling_factor=0.1)
         print(result)
 
     except rospy.ServiceException as e:
