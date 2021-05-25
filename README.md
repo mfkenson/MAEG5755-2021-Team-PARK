@@ -2,6 +2,9 @@
 Team PARK Repo for MAEG5755 Robotics Project
 Pretty, Alice, Rui, Kenson
 
+### Video (Click to Play on YouTube)
+
+[![IMAGE ALT TEXT](http://img.youtube.com/vi/clawx7GzYJo/0.jpg)](http://www.youtube.com/watch?v=clawx7GzYJo"")
 
 ### Objectives
 1. Dexnet 4.0 bin picking demo with Baxter
